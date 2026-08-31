@@ -71,6 +71,8 @@ function applyBorder(placeable) {
   });
 
   outline[OZYLEME_BORDER_MARKER] = true;
+  outline.animated = false;
+  outline.wave = false;
   outline.thickness = thickness;
 
   mesh.filters = [

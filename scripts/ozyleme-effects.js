@@ -48,13 +48,17 @@ function addLightControls(form, document) {
   const fadeIn = getNumberFlag(document, "fadeIn", 0);
   const fadeOut = getNumberFlag(document, "fadeOut", 0);
 
-  const panel = createPanel("Smooth Light Toggle", "fa-solid fa-sun");
+  const panel = createPanel(
+    "Smooth Light Toggle",
+    "fa-solid fa-sun"
+  );
 
   panel.insertAdjacentHTML(
     "beforeend",
     `
       <div class="form-group">
         <label>Fade In</label>
+
         <div class="form-fields">
           <input
             type="number"
@@ -64,8 +68,10 @@ function addLightControls(form, document) {
             max="60"
             step="0.1"
           >
+
           <span class="units">Seconds</span>
         </div>
+
         <p class="hint">
           How long this light takes to reach full brightness.
         </p>
@@ -73,6 +79,7 @@ function addLightControls(form, document) {
 
       <div class="form-group">
         <label>Fade Out</label>
+
         <div class="form-fields">
           <input
             type="number"
@@ -82,8 +89,10 @@ function addLightControls(form, document) {
             max="60"
             step="0.1"
           >
+
           <span class="units">Seconds</span>
         </div>
+
         <p class="hint">
           How long this light takes to switch off.
         </p>
@@ -180,6 +189,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Enabled</label>
+
           <div class="form-fields">
             <input
               type="checkbox"
@@ -191,6 +201,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Intensity</label>
+
           <div class="form-fields">
             <input
               type="range"
@@ -205,6 +216,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Speed</label>
+
           <div class="form-fields">
             <input
               type="number"
@@ -223,6 +235,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Enabled</label>
+
           <div class="form-fields">
             <input
               type="checkbox"
@@ -234,6 +247,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Color</label>
+
           <div class="form-fields">
             <input
               type="color"
@@ -245,6 +259,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Thickness</label>
+
           <div class="form-fields">
             <input
               type="number"
@@ -254,6 +269,7 @@ function addVisualEffectControls(form, document) {
               max="30"
               step="1"
             >
+
             <span class="units">Pixels</span>
           </div>
         </div>
@@ -264,6 +280,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Enabled</label>
+
           <div class="form-fields">
             <input
               type="checkbox"
@@ -275,6 +292,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Color</label>
+
           <div class="form-fields">
             <input
               type="color"
@@ -286,6 +304,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Opacity</label>
+
           <div class="form-fields">
             <input
               type="range"
@@ -300,6 +319,7 @@ function addVisualEffectControls(form, document) {
 
         <div class="form-group">
           <label>Distance</label>
+
           <div class="form-fields">
             <input
               type="number"
@@ -309,12 +329,14 @@ function addVisualEffectControls(form, document) {
               max="100"
               step="1"
             >
+
             <span class="units">Pixels</span>
           </div>
         </div>
 
         <div class="form-group">
           <label>Direction</label>
+
           <div class="form-fields">
             <input
               type="number"
@@ -324,12 +346,14 @@ function addVisualEffectControls(form, document) {
               max="359"
               step="1"
             >
+
             <span class="units">Degrees</span>
           </div>
         </div>
 
         <div class="form-group">
           <label>Blur</label>
+
           <div class="form-fields">
             <input
               type="number"
@@ -339,12 +363,24 @@ function addVisualEffectControls(form, document) {
               max="30"
               step="1"
             >
+
             <span class="units">Pixels</span>
           </div>
         </div>
       </details>
     `
   );
+
+  for (const summary of panel.querySelectorAll("summary")) {
+    summary.addEventListener("click", event => {
+      event.preventDefault();
+
+      const details = summary.closest("details");
+      if (!details) return;
+
+      details.open = !details.open;
+    });
+  }
 
   insertPanel(form, panel);
 }
@@ -382,15 +418,25 @@ function getFlag(document, path, fallback) {
 }
 
 function getNumberFlag(document, path, fallback) {
-  const value = Number(getFlag(document, path, fallback));
-  return Number.isFinite(value) ? value : fallback;
+  const value = Number(
+    getFlag(document, path, fallback)
+  );
+
+  return Number.isFinite(value)
+    ? value
+    : fallback;
 }
 
 function getBooleanFlag(document, path, fallback) {
-  return Boolean(getFlag(document, path, fallback));
+  return Boolean(
+    getFlag(document, path, fallback)
+  );
 }
 
 function getStringFlag(document, path, fallback) {
   const value = getFlag(document, path, fallback);
-  return typeof value === "string" ? value : fallback;
+
+  return typeof value === "string"
+    ? value
+    : fallback;
 }

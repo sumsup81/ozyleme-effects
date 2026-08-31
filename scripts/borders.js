@@ -65,7 +65,10 @@ function applyBorder(placeable) {
     4
   );
 
-  const color = parseColor(settings.color, 0x000000);
+  const color = parseColor(
+    settings.color,
+    0x000000
+  );
 
   const border = new PIXI.Container();
   border.name = BORDER_CONTAINER_NAME;
@@ -86,17 +89,26 @@ function applyBorder(placeable) {
   }
 
   const sourceIndex = parent.getChildIndex(source);
-  parent.addChildAt(border, Math.max(0, sourceIndex));
+
+  if (sourceIndex >= 0) {
+    parent.addChildAt(border, sourceIndex);
+  } else {
+    parent.addChild(border);
+  }
 
   placeable._ozylemeBorder = border;
 }
 
 function createBorderPoints(thickness) {
   const points = [];
-  const steps = Math.max(16, Math.ceil(thickness * 4));
+  const steps = Math.max(
+    16,
+    Math.ceil(thickness * 4)
+  );
 
   for (let index = 0; index < steps; index++) {
-    const angle = (Math.PI * 2 * index) / steps;
+    const angle =
+      (Math.PI * 2 * index) / steps;
 
     points.push({
       x: Math.cos(angle) * thickness,
@@ -107,38 +119,42 @@ function createBorderPoints(thickness) {
   return points;
 }
 
-function createBorderSprite(source, offsetX, offsetY, color) {
-  const sprite = new PIXI.Sprite({
-    texture: source.texture
-  });
+function createBorderSprite(
+  source,
+  offsetX,
+  offsetY,
+  color
+) {
+  const sprite = PIXI.Sprite.from(source.texture);
 
-  if (source.anchor && sprite.anchor) {
-    sprite.anchor.set(
-      source.anchor.x,
-      source.anchor.y
-    );
-  }
+  const anchorX = source.anchor?.x ?? 0.5;
+  const anchorY = source.anchor?.y ?? 0.5;
+
+  sprite.anchor.set(anchorX, anchorY);
+
+  const positionX = source.position?.x ?? source.x ?? 0;
+  const positionY = source.position?.y ?? source.y ?? 0;
 
   sprite.position.set(
-    source.position.x + offsetX,
-    source.position.y + offsetY
+    positionX + offsetX,
+    positionY + offsetY
   );
 
-  sprite.scale.set(
-    source.scale.x,
-    source.scale.y
-  );
+  const scaleX = source.scale?.x ?? 1;
+  const scaleY = source.scale?.y ?? 1;
 
-  sprite.rotation = source.rotation;
-  sprite.alpha = source.alpha;
+  sprite.scale.set(scaleX, scaleY);
+
+  sprite.rotation = source.rotation ?? 0;
+  sprite.alpha = source.alpha ?? 1;
   sprite.tint = color;
   sprite.eventMode = "none";
   sprite.blendMode = "normal";
 
   if (source.skew && sprite.skew) {
     sprite.skew.set(
-      source.skew.x,
-      source.skew.y
+      source.skew.x ?? 0,
+      source.skew.y ?? 0
     );
   }
 
@@ -148,28 +164,45 @@ function createBorderSprite(source, offsetX, offsetY, color) {
 function removeBorder(placeable) {
   const border = placeable?._ozylemeBorder;
 
-  if (border) {
-    border.destroy({
-      children: true
-    });
+  if (!border) return;
 
-    delete placeable._ozylemeBorder;
-  }
+  border.destroy({
+    children: true
+  });
+
+  delete placeable._ozylemeBorder;
 }
 
 function parseColor(value, fallback) {
-  if (typeof value !== "string") return fallback;
+  if (typeof value !== "string") {
+    return fallback;
+  }
 
   const normalized = value.replace("#", "");
-  const parsed = Number.parseInt(normalized, 16);
+  const parsed = Number.parseInt(
+    normalized,
+    16
+  );
 
-  return Number.isFinite(parsed) ? parsed : fallback;
+  return Number.isFinite(parsed)
+    ? parsed
+    : fallback;
 }
 
-function clampNumber(value, minimum, maximum, fallback) {
+function clampNumber(
+  value,
+  minimum,
+  maximum,
+  fallback
+) {
   const number = Number(value);
 
-  if (!Number.isFinite(number)) return fallback;
+  if (!Number.isFinite(number)) {
+    return fallback;
+  }
 
-  return Math.min(maximum, Math.max(minimum, number));
+  return Math.min(
+    maximum,
+    Math.max(minimum, number)
+  );
 }

@@ -1,8 +1,8 @@
 {
-  "id": "smooth-light-fades",
-  "title": "Smooth Light Fades",
-  "description": "Adds configurable fade-in and fade-out times to Foundry VTT ambient lights.",
-  "version": "0.1.0",
+  "id": "ozyleme-effects",
+  "title": "Ozyleme Effects",
+  "description": "Lightweight visual effects and smooth light transitions for Foundry VTT.",
+  "version": "0.2.0",
   "authors": [
     {
       "name": "sumsup81"
@@ -14,13 +14,13 @@
     "maximum": "14"
   },
   "esmodules": [
-    "scripts/smooth-light-fades.js"
+    "scripts/ozyleme-effects.js"
   ],
   "styles": [
-    "styles/smooth-light-fades.css"
+    "styles/ozyleme-effects.css"
   ],
   "socket": true,
-  "url": "https://github.com/sumsup81/smooth-light-fades",
-  "manifest": "https://github.com/sumsup81/smooth-light-fades/releases/latest/download/module.json",
-  "download": "https://github.com/sumsup81/smooth-light-fades/releases/latest/download/smooth-light-fades.zip"
+  "url": "https://github.com/sumsup81/ozyleme-effects",
+  "manifest": "https://github.com/sumsup81/ozyleme-effects/releases/latest/download/module.json",
+  "download": "https://github.com/sumsup81/ozyleme-effects/releases/latest/download/ozyleme-effects.zip"
 }

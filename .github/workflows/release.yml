@@ -18,12 +18,12 @@ jobs:
 
       - name: Build module package
         run: |
-          zip -r smooth-light-fades.zip module.json scripts styles
+          zip -r ozyleme-effects.zip module.json scripts styles
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             module.json
-            smooth-light-fades.zip
+            ozyleme-effects.zip
           generate_release_notes: true

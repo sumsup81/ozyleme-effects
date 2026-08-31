@@ -1,0 +1,26 @@
+{
+  "id": "smooth-light-fades",
+  "title": "Smooth Light Fades",
+  "description": "Adds configurable fade-in and fade-out times to Foundry VTT ambient lights.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "sumsup81"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.367",
+    "maximum": "14"
+  },
+  "esmodules": [
+    "scripts/smooth-light-fades.js"
+  ],
+  "styles": [
+    "styles/smooth-light-fades.css"
+  ],
+  "socket": true,
+  "url": "https://github.com/sumsup81/smooth-light-fades",
+  "manifest": "https://github.com/sumsup81/smooth-light-fades/releases/latest/download/module.json",
+  "download": "https://github.com/sumsup81/smooth-light-fades/releases/latest/download/smooth-light-fades.zip"
+}

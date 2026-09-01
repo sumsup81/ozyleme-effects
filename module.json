@@ -2,7 +2,7 @@
   "id": "ozyleme-effects",
   "title": "Ozyleme Effects",
   "description": "Lightweight visual effects and smooth light transitions for Foundry VTT.",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "authors": [
     {
       "name": "sumsup81"
@@ -17,7 +17,8 @@
     "scripts/ozyleme-effects.js",
     "scripts/borders.js",
     "scripts/shadows.js",
-    "scripts/lights.js"
+    "scripts/lights.js",
+    "scripts/film.js"
   ],
   "styles": [
     "styles/ozyleme-effects.css"
